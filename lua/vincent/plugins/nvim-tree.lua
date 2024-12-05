@@ -1,10 +1,7 @@
------------------------
--- [[ tree plugin ]] --
------------------------
-
 return {
   "nvim-tree/nvim-tree.lua",
   dependencies = "nvim-tree/nvim-web-devicons",
+
   config = function()
     -- Recommended settings from nvim-tree documentation
     vim.g.loaded_netrw = 1
@@ -12,20 +9,17 @@ return {
 
     -- [[ Configuration ]]
     require("nvim-tree").setup({
-      -- View settings
       view = {
         width = 35,
         relativenumber = true
       },
 
-      -- Render settings
       renderer = {
         indent_markers = {
           enable = true,
         },
       },
         
-      -- Actions settings
       actions = {
         open_file = {
           window_picker = {
@@ -34,12 +28,10 @@ return {
         },
       },
       
-      -- Filter settings
       filters = {
         custom = { ".DS_Store" },
       },
 
-      -- Git settings
       git = {
         ignore = false,
       },

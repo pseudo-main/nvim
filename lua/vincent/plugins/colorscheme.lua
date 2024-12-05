@@ -1,7 +1,3 @@
--------------------------------
--- [[ Colorscheme Plugins ]] --
--------------------------------
-
 return {
   "catppuccin/nvim",
   name = "catppuccin",  -- Otherwise the name is "nvim" in the plugin overview

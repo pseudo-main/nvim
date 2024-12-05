@@ -1,7 +1,3 @@
---------------------------
--- [[ lualine plugin ]] --
---------------------------
-
 return {
   "nvim-lualine/lualine.nvim",
 
@@ -10,10 +6,8 @@ return {
     "AndreM222/copilot-lualine",
   },
 
-  -- [[ Configuration ]]
   config = function()
     require("lualine").setup({
-      -- Sections
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
@@ -23,7 +17,6 @@ return {
         lualine_z = { "location" },
       },
 
-      -- Inactive sections
       inactive_sections = {
         lualine_a = {},
         lualine_b = {},
@@ -33,12 +26,10 @@ return {
         lualine_z = {},
       },
 
-      -- Disabled filetypes
       disabled_filetypes = {
         "NvimTree",
       },
 
-      -- Extensions
       extensions = {
         "nvim-tree",
       },
