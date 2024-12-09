@@ -32,7 +32,8 @@ opt.wrap = false
 -- [[ Search ]]
 opt.ignorecase = true
 opt.smartcase = true
-opt.cursorline = true
+opt.hlsearch = false
+opt.incsearch = true
 
 -- [[ Clipboard ]]
 opt.swapfile = false
