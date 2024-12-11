@@ -33,6 +33,10 @@ return {
       extensions = {
         "nvim-tree",
       },
+
+      options = {
+        theme = "catppuccin",
+      },
     })
   end,
 }
