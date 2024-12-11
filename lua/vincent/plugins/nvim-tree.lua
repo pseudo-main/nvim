@@ -1,6 +1,9 @@
 return {
   "nvim-tree/nvim-tree.lua",
-  dependencies = "nvim-tree/nvim-web-devicons",
+
+  dependencies = {
+    "nvim-tree/nvim-web-devicons", -- Icons
+  },
 
   config = function()
     -- Recommended settings from nvim-tree documentation
@@ -19,7 +22,7 @@ return {
           enable = true,
         },
       },
-        
+
       actions = {
         open_file = {
           window_picker = {
@@ -27,7 +30,7 @@ return {
           },
         },
       },
-      
+
       filters = {
         custom = { ".DS_Store" },
       },
