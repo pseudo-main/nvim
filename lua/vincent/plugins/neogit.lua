@@ -1,13 +1,13 @@
+-- [[ Plugin neogit ]]
+--  Settings have mostly been copied from the Github documentation.
 return {
-  "NeogitOrg/neogit",
+	"NeogitOrg/neogit",
 
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "sindrets/diffview.nvim",
-    "nvim-telescope/telescope.nvim",
-  },
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"sindrets/diffview.nvim",
+		"nvim-telescope/telescope.nvim",
+	},
 
-  config = function()
-    require("neogit").setup()
-  end,
+	config = true,
 }

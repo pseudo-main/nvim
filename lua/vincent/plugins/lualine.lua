@@ -1,42 +1,44 @@
+-- [[ Plugin lualine ]]
+--  Settings have mostly been copied from the Github documentation.
 return {
-  "nvim-lualine/lualine.nvim",
+	"nvim-lualine/lualine.nvim",
 
-  dependencies = {
-    "nvim-tree/nvim-web-devicons",
-    "AndreM222/copilot-lualine",
-  },
+	dependencies = {
+		"nvim-tree/nvim-web-devicons",
+		"AndreM222/copilot-lualine",
+	},
 
-  config = function()
-    require("lualine").setup({
-      sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { { "filename", path = 1 } },
-        lualine_x = { "encodig", "fileformat", "filetype" },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
-      },
+	config = function()
+		require("lualine").setup({
+			sections = {
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = { { "filename", path = 1 } },
+				lualine_x = { "encodig", "fileformat", "filetype" },
+				lualine_y = { "progress" },
+				lualine_z = { "location" },
+			},
 
-      inactive_sections = {
-        lualine_a = {},
-        lualine_b = {},
-        lualine_c = { { "filename", path = 1 } },
-        lualine_x = { "location" },
-        lualine_y = {},
-        lualine_z = {},
-      },
+			inactive_sections = {
+				lualine_a = {},
+				lualine_b = {},
+				lualine_c = { { "filename", path = 1 } },
+				lualine_x = { "location" },
+				lualine_y = {},
+				lualine_z = {},
+			},
 
-      disabled_filetypes = {
-        "NvimTree",
-      },
+			disabled_filetypes = {
+				"NvimTree",
+			},
 
-      extensions = {
-        "nvim-tree",
-      },
+			extensions = {
+				"nvim-tree",
+			},
 
-      options = {
-        theme = "catppuccin",
-      },
-    })
-  end,
+			options = {
+				theme = "catppuccin",
+			},
+		})
+	end,
 }
