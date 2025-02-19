@@ -20,7 +20,7 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			python = { "black", "isort", "pylint" },
+			python = { "ruff_fix", "ruff_format" },
 		},
 
 		format_on_save = {
