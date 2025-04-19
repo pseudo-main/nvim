@@ -1,3 +1,35 @@
+-- [[ Keymaps ]]
+local keymaps = {
+	["<C-j>"] = { action = "select_next_item" },
+	["<C-k>"] = { action = "select_prev_item" },
+	["<C-b>"] = { action = "scroll_docs", args = -4 },
+	["<C-f>"] = { action = "scroll_docs", args = 4 },
+	["<C-y>"] = { action = "confirm", args = { select = true } },
+	["<C-Space>"] = { action = "complete", args = {} },
+
+	["<C-l>"] = {
+		fn = function(luasnip)
+			return function()
+				if luasnip.expand_or_locally_jumpable() then
+					luasnip.expand_or_jump()
+				end
+			end
+		end,
+		modes = { "i", "s" },
+	},
+
+	["<C-h>"] = {
+		fn = function(luasnip)
+			return function()
+				if luasnip.locally_jumpable(-1) then
+					luasnip.jump(-1)
+				end
+			end
+		end,
+		modes = { "i", "s" },
+	},
+}
+
 -- [[ Plugin configuration ]]
 return {
 	"hrsh7th/nvim-cmp",
@@ -14,7 +46,6 @@ return {
 			end)(),
 		},
 		"saadparwaiz1/cmp_luasnip",
-
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
 	},
@@ -24,6 +55,16 @@ return {
 		local luasnip = require("luasnip")
 		luasnip.config.setup({})
 
+		local mappings = {}
+		for key, map in pairs(keymaps) do
+			if map.fn then
+				mappings[key] = cmp.mapping(map.fn(luasnip), map.modes)
+			else
+				local args = map.args or {}
+				mappings[key] = cmp.mapping[map.action](args)
+			end
+		end
+
 		cmp.setup({
 			snippet = {
 				expand = function(args)
@@ -31,34 +72,9 @@ return {
 				end,
 			},
 			completion = { completeopt = "menu,menuone,noinsert" },
-
-			mapping = cmp.mapping.preset.insert({
-				["<C-j>"] = cmp.mapping.select_next_item(),
-				["<C-k>"] = cmp.mapping.select_prev_item(),
-
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
-				["<C-f>"] = cmp.mapping.scroll_docs(4),
-
-				["<C-y>"] = cmp.mapping.confirm({ select = true }),
-
-				["<C-Space>"] = cmp.mapping.complete({}),
-
-				["<C-l>"] = cmp.mapping(function()
-					if luasnip.expand_or_locally_jumpable() then
-						luasnip.expand_or_jump()
-					end
-				end, { "i", "s" }),
-				["<C-h>"] = cmp.mapping(function()
-					if luasnip.locally_jumpable(-1) then
-						luasnip.jump(-1)
-					end
-				end, { "i", "s" }),
-			}),
+			mapping = cmp.mapping.preset.insert(mappings),
 			sources = {
-				{
-					name = "lazydev",
-					group_index = 0,
-				},
+				{ name = "lazydev", group_index = 0 },
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
 				{ name = "path" },
