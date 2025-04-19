@@ -1,18 +1,23 @@
--- [[ Plugin tree ]]
---  Settings have mostly been copied from the Github documentation.
+local utils = require("vincent.core.utils")
+
+-- [[ Keymaps ]]
+utils.map("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
+utils.map("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
+utils.map("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
+utils.map("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
+
+-- [[ Plugin configuration ]]
 return {
 	"nvim-tree/nvim-tree.lua",
 
 	dependencies = {
-		"nvim-tree/nvim-web-devicons", -- Icons
+		"nvim-tree/nvim-web-devicons",
 	},
 
 	config = function()
-		-- Recommended settings from nvim-tree documentation
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 
-		-- [[ Configuration ]]
 		require("nvim-tree").setup({
 			view = {
 				width = 35,
@@ -41,13 +46,5 @@ return {
 				ignore = false,
 			},
 		})
-
-		-- [[ Keymaps ]]
-		local set = vim.keymap.set
-
-		set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })
-		set("n", "<leader>ef", "<cmd>NvimTreeFindFileToggle<CR>", { desc = "Toggle file explorer on current file" })
-		set("n", "<leader>ec", "<cmd>NvimTreeCollapse<CR>", { desc = "Collapse file explorer" })
-		set("n", "<leader>er", "<cmd>NvimTreeRefresh<CR>", { desc = "Refresh file explorer" })
 	end,
 }
