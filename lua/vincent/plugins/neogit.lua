@@ -1,5 +1,4 @@
--- [[ Plugin neogit ]]
---  Settings have mostly been copied from the Github documentation.
+-- [[ Plugin configuration ]]
 return {
 	"NeogitOrg/neogit",
 
