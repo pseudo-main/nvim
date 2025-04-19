@@ -1,5 +1,53 @@
+local utils = require("vincent.core.utils")
+local telescope = require("telescope.builtin")
+
+-- [[ Keymaps ]]
+local keymaps = {
+	{
+		mode = "n",
+		lhs = "<leader>gd",
+		rhs = telescope.lsp_definitions,
+		opts = { desc = "[G]o to [d]efinition" },
+	},
+	{
+		mode = "n",
+		lhs = "<leader>gr",
+		rhs = telescope.lsp_references,
+		opts = { desc = "[G]o to [r]eferences" },
+	},
+	{
+		mode = "n",
+		lhs = "<leader>gi",
+		rhs = telescope.lsp_implementations,
+		opts = { desc = "[G]o to [i]mplementation" },
+	},
+	{
+		mode = "n",
+		lhs = "<leader>gt",
+		rhs = telescope.lsp_implementations,
+		opts = { desc = "[G]o to [t]ype" },
+	},
+	{
+		mode = "n",
+		lhs = "<leader>sd",
+		rhs = telescope.lsp_document_symbols,
+		opts = { desc = "Find [s]ymbols in [d]ocument" },
+	},
+	{
+		mode = "n",
+		lhs = "<leader>sw",
+		rhs = telescope.lsp_workspace_symbols,
+		opts = { desc = "Find [s]ymbols in [w]orkspace" },
+	},
+	{
+		mode = "n",
+		lhs = "<leader>sr",
+		rhs = vim.lsp.buf.rename,
+		opts = { desc = "[S]ymbol [r]ename" },
+	},
+}
+
 -- [[ Plugins lspconfig, mason, mason-lspconfig, mason-tool-installer, cmp-nvim-lsp ]]
---  Settings have mostly been copied from the kickstart.nvim Github documentation.
 return {
 	"neovim/nvim-lspconfig",
 
@@ -33,32 +81,15 @@ return {
 			group = vim.api.nvim_create_augroup("user-lsp-config", { clear = true }),
 
 			callback = function(event)
-				-- [[ Utilities for keymaps ]]
-				-- Helper function to easily define mappings
-				local map = function(keys, func, desc, mode)
-					mode = mode or "n"
-					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+				for _, keymap in ipairs(keymaps) do
+					utils.map_buf(event.buf, keymap.mode, keymap.lhs, keymap.rhs, keymap.opts)
 				end
 
-				-- [[ Keymaps ]]
-				-- "Go to" keymaps
-				map("<leader>gd", require("telescope.builtin").lsp_definitions, "[g]o to [d]efinition")
-				map("<leader>gr", require("telescope.builtin").lsp_references, "[g]o to [r]eferences")
-				map("<leader>gi", require("telescope.builtin").lsp_implementations, "[g]o to [i]mplementation")
-				map("<leader>gt", require("telescope.builtin").lsp_implementations, "[g]o to [t]ype")
-
-				-- "Find" keymaps
-				map("<leader>sd", require("telescope.builtin").lsp_document_symbols, "find [s]ymbols in [d]ocument")
-				map("<leader>sw", require("telescope.builtin").lsp_workspace_symbols, "find [s]ymbols in [w]orkspace")
-
-				-- "Other" keymaps
-				map("<leader>sr", vim.lsp.buf.rename, "[s]ymbol [r]ename")
-
-				-- [[ Other ]]
-				-- "Hover highlight" function
+				-- Hover highlight
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
 					local highlight_augroup = vim.api.nvim_create_augroup("user-lsp-hover-highlight", { clear = false })
+
 					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
 						buffer = event.buf,
 						group = highlight_augroup,
