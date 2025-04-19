@@ -1,5 +1,4 @@
--- [[ Plugin conform ]]
---  Settings have mostly been copied from the Github documentation.
+-- [[ Plugin configuration ]]
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
