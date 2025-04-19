@@ -1,5 +1,4 @@
--- [[ Plugin lualine ]]
---  Settings have mostly been copied from the Github documentation.
+-- [[ Plugin configuration ]]
 return {
 	"nvim-lualine/lualine.nvim",
 
