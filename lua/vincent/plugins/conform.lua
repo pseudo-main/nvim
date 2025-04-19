@@ -1,20 +1,21 @@
+-- [[ Keymaps ]]
+local keymaps = {
+	{
+		"<leader>f",
+		function()
+			require("conform").format({ async = true })
+		end,
+		mode = "",
+		desc = "[f]ormat buffer",
+	},
+}
+
 -- [[ Plugin configuration ]]
 return {
 	"stevearc/conform.nvim",
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
-
-	-- [[ Keymaps ]]
-	keys = {
-		{
-			"<leader>f",
-			function()
-				require("conform").format({ async = true })
-			end,
-			mode = "",
-			desc = "[f]ormat buffer",
-		},
-	},
+	keys = keymaps,
 
 	opts = {
 		formatters_by_ft = {
