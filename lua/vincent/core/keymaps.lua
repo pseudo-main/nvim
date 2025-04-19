@@ -1,13 +1,8 @@
--------------------
--- [[ Keymaps ]] --
--------------------
+local set = vim.keymap.set
 
--- [[ Leader ]]
+-- Leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
--- [[ General keymaps ]]
-local set = vim.keymap.set
 
 -- Center the cursor
 set("n", "<C-d>", "<C-d>zz")
