@@ -23,6 +23,7 @@ vim.g.python_indent = {
 
 -- Text wrapping
 opt.wrap = false
+opt.colorcolumn = "88"
 
 -- Search
 opt.ignorecase = true
